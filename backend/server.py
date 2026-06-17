@@ -1,5 +1,6 @@
 import json
 import mimetypes
+import sys
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -38,6 +39,11 @@ from projects.meta_project.service import (
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 FRONTEND_DIR = ROOT_DIR / "frontend"
+
+
+def safe_print(message: str) -> None:
+    if sys.stdout:
+        print(message)
 
 
 class ProjectHormuzHandler(BaseHTTPRequestHandler):
@@ -185,7 +191,7 @@ class ProjectHormuzHandler(BaseHTTPRequestHandler):
         self._json({"error": "Not found"}, status=HTTPStatus.NOT_FOUND)
 
     def log_message(self, format: str, *args) -> None:
-        print(f"[{self.log_date_time_string()}] {format % args}")
+        safe_print(f"[{self.log_date_time_string()}] {format % args}")
 
     def _handle_api_request(self, handler) -> None:
         try:
@@ -262,7 +268,7 @@ def main() -> None:
     port = 8000
     server = ThreadingHTTPServer((host, port), ProjectHormuzHandler)
     start_automation_scheduler()
-    print(f"Project Hormuz monitor running at http://{host}:{port}")
+    safe_print(f"Project Prototype running at http://{host}:{port}")
     server.serve_forever()
 
 

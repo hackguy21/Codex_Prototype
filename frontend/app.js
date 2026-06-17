@@ -4,7 +4,6 @@ const state = {
   zones: [],
   dailyNewsText: "",
   flightText: "",
-  marineText: "",
 };
 
 const $ = (selector) => document.querySelector(selector);
@@ -80,12 +79,6 @@ async function loadZones() {
     container: $("#flightZones"),
     enabledKey: "aircraft_enabled",
     disabledText: "항공 제외",
-  });
-  renderZones({
-    count: $("#marineZoneCount"),
-    container: $("#marineZones"),
-    enabledKey: "vessel_enabled",
-    disabledText: "해상 제외",
   });
 }
 
@@ -338,22 +331,8 @@ setupMonitorProject({
   },
   getText: () => state.flightText,
 });
-setupMonitorProject({
-  name: "MarineTraffic",
-  path: "/api/marine_traffic/monitor",
-  button: $("#marineMonitorButton"),
-  copy: $("#marineCopyButton"),
-  status: $("#marineStatus"),
-  output: $("#marineTextOutput"),
-  snapshots: $("#marineSnapshots"),
-  setText: (text) => {
-    state.marineText = text;
-  },
-  getText: () => state.marineText,
-});
 loadZones().catch((error) => {
   $("#flightStatus").textContent = error.message;
-  $("#marineStatus").textContent = error.message;
 });
 loadMetaSettings().catch((error) => {
   $("#dailyNewsStatus").textContent = error.message;

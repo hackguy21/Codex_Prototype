@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Project Hormuz Workspace</title>
+    <title>Project Prototype</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
@@ -12,8 +12,8 @@
         <div class="brand">
           <div class="brand-row">
             <div>
-              <h1>Project Hormuz</h1>
-              <p>Monitoring Workspace</p>
+              <h1>Project Prototype</h1>
+              <p>바이브코딩에 사용되는 CSS/UI와 아키텍처의 프로토타입을 제공합니다</p>
             </div>
             <button id="sidebarMenuButton" class="menu-toggle" type="button" aria-label="메뉴 열기/닫기" aria-expanded="true">
               <span></span>
@@ -27,12 +27,12 @@
           <section class="nav-category">
             <button class="nav-category-head" type="button" aria-expanded="true">
               <span>META PROJECT</span>
-              <strong>2</strong>
+              <strong>1</strong>
             </button>
             <div class="nav-category-items">
               <button class="nav-item active" data-project="daily_news_manager">
                 <span>메타프로젝트 1</span>
-                <strong>수집 및 요약 / 전송</strong>
+                <strong>전체 요약 및 전송</strong>
               </button>
               <button class="nav-item" data-project="other_manager">
                 <span>메타프로젝트 2</span>
@@ -43,16 +43,12 @@
           <section class="nav-category">
             <button class="nav-category-head" type="button" aria-expanded="true">
               <span>Daily Monitor</span>
-              <strong>2</strong>
+              <strong>1</strong>
             </button>
             <div class="nav-category-items">
               <button class="nav-item" data-project="flightradar24">
                 <span>프로젝트 1</span>
                 <strong>FlightRadar24</strong>
-              </button>
-              <button class="nav-item" data-project="marine_traffic">
-                <span>프로젝트 2</span>
-                <strong>MarineTraffic</strong>
               </button>
             </div>
           </section>
@@ -63,8 +59,8 @@
         <section id="daily_news_manager" class="project-view active">
           <header class="project-header">
             <div>
-              <h2>수집 및 요약 / 전송</h2>
-              <p>Daily Monitor 프로젝트의 현재 스캐폴드 상태를 수집하고, 통합 요약 또는 텔레그램 전송을 실행합니다.</p>
+              <h2>전체 요약 및 전송</h2>
+              <p>바이브코딩에 사용되는 CSS/UI와 아키텍처의 프로토타입을 제공합니다</p>
             </div>
             <div class="header-actions">
               <button id="dailyNewsScrapeButton" class="primary" type="button">수집 및 요약</button>
@@ -87,7 +83,7 @@
                 <button id="dailyNewsCopyButton" class="ghost" type="button" disabled>텍스트 복사</button>
               </div>
               <div id="dailyNewsStatus" class="status">아직 수집 전입니다.</div>
-              <textarea id="dailyNewsTextOutput" readonly placeholder="FlightRadar24와 MarineTraffic의 통합 모니터링 요약이 여기에 표시됩니다."></textarea>
+              <textarea id="dailyNewsTextOutput" readonly placeholder="FlightRadar24 통합 모니터링 요약이 여기에 표시됩니다."></textarea>
               <div id="dailyNewsResults" class="item-list"></div>
             </section>
           </div>
@@ -97,7 +93,7 @@
           <header class="project-header">
             <div>
               <h2>기타</h2>
-              <p>Project Hormuz의 현재 구조와 구현 경계를 확인합니다.</p>
+              <p>CSS/UI 패턴과 로컬 아키텍처 프로토타입의 구성 요소를 확인합니다.</p>
             </div>
           </header>
 
@@ -108,11 +104,12 @@
               </div>
               <div class="standard-panel plain-standard-panel">
                 <ul>
-                  <li><strong>frontend/</strong>: 프로젝트 네비게이션, 모니터링 패널, 결과 표시 UI</li>
-                  <li><strong>backend/server.py</strong>: 정적 파일 제공과 JSON API 라우팅</li>
-                  <li><strong>backend/projects/meta_project/</strong>: 메타 프로젝트 설정, 선택 프로젝트 실행, 텔레그램 전송 흐름</li>
-                  <li><strong>backend/projects/traffic_monitor/</strong>: 구역 설정과 FlightRadar24/MarineTraffic 스캐폴드 응답</li>
-                  <li><strong>data/</strong>: 메타 설정과 구역 설정 JSON 저장소</li>
+                  <li><strong>frontend/</strong>: 사이드바, 패널, 리스트, 결과 영역 등 바이브코딩용 UI 패턴</li>
+                  <li><strong>frontend/styles.css</strong>: 재사용 가능한 레이아웃, 카드, 버튼, 상태 표시 스타일</li>
+                  <li><strong>frontend/app.js</strong>: 화면 상태, API 호출, 렌더링, 기본 상호작용 핸들러</li>
+                  <li><strong>backend/server.py</strong>: 정적 파일 제공과 JSON API 라우팅을 담당하는 표준 라이브러리 서버</li>
+                  <li><strong>backend/projects/meta_project/</strong>: 프로젝트 카탈로그, 설정 정규화, 프로토타입 실행 흐름</li>
+                  <li><strong>data/</strong>: 화면 구성과 프로토타입 설정을 보관하는 JSON 저장소</li>
                 </ul>
               </div>
             </section>
@@ -123,10 +120,10 @@
               </div>
               <div class="standard-panel plain-standard-panel">
                 <ul>
-                  <li><strong>META PROJECT</strong>: Daily Monitor 프로젝트의 수집 및 요약, 텔레그램 전송</li>
-                  <li><strong>FlightRadar24</strong>: 호르무즈 구역 항공 모니터링 스캐폴드</li>
-                  <li><strong>MarineTraffic</strong>: 호르무즈 구역 해상 모니터링 스캐폴드</li>
-                  <li><strong>보류된 구현</strong>: 실제 캡처, 이미지 저장, 변화 감지, 텔레그램 이미지 전송</li>
+                  <li><strong>Project Prototype</strong>: 바이브코딩에 사용할 CSS/UI와 아키텍처 샘플 제공</li>
+                  <li><strong>메타프로젝트</strong>: 프로젝트 구조, 설정, 실행 흐름을 한 화면에서 확인하는 컨트롤 패널</li>
+                  <li><strong>UI 스캐폴드</strong>: 실제 도메인 로직을 붙이기 전 사용할 기본 화면과 API 연결 구조</li>
+                  <li><strong>확장 지점</strong>: 새 프로젝트, 데이터 저장소, 실행 어댑터를 추가할 수 있는 폴더 구조</li>
                 </ul>
               </div>
             </section>
@@ -168,40 +165,6 @@
           </div>
         </section>
 
-        <section id="marine_traffic" class="project-view">
-          <header class="project-header">
-            <div>
-              <h2>MarineTraffic</h2>
-              <p>호르무즈 구역 해상 트래픽 모니터링 스캐폴드</p>
-            </div>
-            <button id="marineMonitorButton" class="primary" type="button">모니터링 평가</button>
-          </header>
-
-          <div class="project-grid">
-            <section class="panel">
-              <div class="section-head">
-                <h3>구역 설정</h3>
-                <div class="section-actions">
-                  <span id="marineZoneCount" class="muted"></span>
-                  <button class="ghost panel-toggle" type="button" data-toggle-target="marineZonePanelBody">접기</button>
-                </div>
-              </div>
-              <div id="marineZonePanelBody" class="panel-body">
-                <div id="marineZones" class="item-list"></div>
-              </div>
-            </section>
-
-            <section class="panel results-panel">
-              <div class="section-head">
-                <h3>해상 모니터링 결과</h3>
-                <button id="marineCopyButton" class="ghost" type="button" disabled>텍스트 복사</button>
-              </div>
-              <div id="marineStatus" class="status">아직 모니터링 전입니다.</div>
-              <textarea id="marineTextOutput" readonly placeholder="MarineTraffic 모니터링 계획과 상태가 여기에 표시됩니다."></textarea>
-              <div id="marineSnapshots" class="item-list"></div>
-            </section>
-          </div>
-        </section>
       </main>
     </div>
 

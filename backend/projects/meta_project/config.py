@@ -8,8 +8,8 @@ SETTINGS_PATH = DATA_DIR / "settings.json"
 
 META_PROJECT = {
     "id": "meta_project",
-    "name": "모니터링 관제",
-    "description": "구역 모니터링 실행 대상과 텔레그램 전송 흐름을 관리합니다.",
+    "name": "Project Prototype",
+    "description": "바이브코딩에 사용되는 CSS/UI와 아키텍처의 프로토타입을 제공합니다",
     "order": 0,
     "enabled": True,
     "category": "meta_project",
@@ -28,8 +28,8 @@ DEFAULT_NAV_CATEGORIES = [
 DEFAULT_PROJECTS = [
     {
         "id": "daily_news_manager",
-        "name": "수집 및 요약 / 전송",
-        "description": "Daily Monitor 프로젝트의 수집 및 요약, 텔레그램 전송 흐름을 관리합니다.",
+        "name": "전체 요약 및 전송",
+        "description": "바이브코딩에 사용되는 CSS/UI와 아키텍처의 프로토타입을 제공합니다",
         "order": 1,
         "enabled": True,
         "category": "meta_project",
@@ -37,7 +37,7 @@ DEFAULT_PROJECTS = [
     {
         "id": "other_manager",
         "name": "기타",
-        "description": "Project Hormuz의 코드 구조와 백엔드 경계를 확인합니다.",
+        "description": "CSS/UI 패턴과 로컬 아키텍처 프로토타입의 구성 요소를 확인합니다.",
         "order": 2,
         "enabled": True,
         "category": "meta_project",
@@ -51,19 +51,10 @@ DEFAULT_PROJECTS = [
         "category": "project",
         "nav_category": "daily_monitor",
     },
-    {
-        "id": "marine_traffic",
-        "name": "MarineTraffic",
-        "description": "호르무즈 구역 해상 트래픽 모니터링 스캐폴드",
-        "order": 11,
-        "enabled": True,
-        "category": "project",
-        "nav_category": "daily_monitor",
-    },
 ]
 
 DEFAULT_SETTINGS = {
-    "selected_projects": ["flightradar24", "marine_traffic"],
+    "selected_projects": ["flightradar24"],
     "projects": DEFAULT_PROJECTS,
     "nav_categories": DEFAULT_NAV_CATEGORIES,
 }
