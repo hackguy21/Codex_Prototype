@@ -26,7 +26,8 @@ backend/
   server.py       Standard-library HTTP API and static file server
   projects/
     meta_project/
-      config.py   Project catalog and settings normalization
+      config.py        Project catalog and settings normalization
+    normal_project/    Holding area for manually added prototype feature code
 
 data/
   meta_project/
@@ -61,9 +62,16 @@ When adding a new prototype module:
 2. Persist matching settings in `data/meta_project/settings.json` when needed.
 3. Add the visible view in `frontend/index.html`.
 4. Add rendering and API behavior in `frontend/app.js`.
-5. Add a bounded backend module under `backend/projects/<project_id>/` only when server-side logic is truly needed.
+5. Put new hand-written or vibe-coded backend feature code under `backend/projects/normal_project/` first.
+6. Move code out of `normal_project` only when it becomes a stable standalone project boundary that deserves its own module.
 
 Keep new UI work aligned with the existing sidebar, panel, compact list, and result-output patterns. The point of this repository is to make future experiments feel coherent quickly.
+
+## Normal Project Rule
+
+`backend/projects/normal_project/` is the default backend workspace for additional manual implementation.
+
+Use it for specific functions, experiments, adapters, or helper modules added during vibe-coding. Each feature should live in a small clearly named file or subdirectory inside `normal_project`. Avoid creating new top-level project packages until the feature has a clear, reusable boundary.
 
 ## Removed Legacy Scope
 
