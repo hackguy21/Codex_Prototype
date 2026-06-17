@@ -330,9 +330,7 @@ textarea {
   resize: vertical;
 }
 
-#flightTextOutput,
-#marineTextOutput,
-#dailyNewsTextOutput {
+#summaryTextOutput {
   height: 160px;
   min-height: 150px;
 }
@@ -403,39 +401,6 @@ textarea {
 
 .check input {
   width: auto;
-}
-
-.checkbox-list {
-  display: grid;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.checkbox-card {
-  align-items: flex-start;
-  background: #fbfcfe;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  cursor: pointer;
-  display: grid;
-  gap: 10px;
-  grid-template-columns: auto 1fr;
-  padding: 12px;
-}
-
-.checkbox-card input {
-  margin-top: 3px;
-  width: auto;
-}
-
-.checkbox-card span {
-  display: grid;
-  gap: 4px;
-}
-
-.checkbox-card small {
-  color: var(--muted);
-  line-height: 1.4;
 }
 
 .project-config-card {
@@ -592,40 +557,6 @@ textarea {
 .item-list {
   display: grid;
   gap: 12px;
-}
-
-.source-group {
-  background: #ffffff;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.source-head {
-  align-items: center;
-  background: #eef3f8;
-  display: flex;
-  gap: 14px;
-  justify-content: space-between;
-  padding: 12px 14px;
-}
-
-.source-title {
-  font-weight: 700;
-}
-
-.source-toggle {
-  min-width: 72px;
-}
-
-.source-articles {
-  display: grid;
-  gap: 10px;
-  padding: 12px;
-}
-
-.source-group.collapsed .source-articles {
-  display: none;
 }
 
 .item-card {

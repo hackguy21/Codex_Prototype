@@ -1,1 +1,1 @@
-"""Project modules for the news scraper workspace."""
+"""Project modules for Project Prototype."""

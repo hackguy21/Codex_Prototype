@@ -1,1 +1,0 @@
-"""Global news RSS project."""

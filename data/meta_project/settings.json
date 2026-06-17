@@ -1,41 +1,20 @@
 {
-  "selected_projects": [
-    "flightradar24"
-  ],
   "projects": [
     {
-      "id": "daily_news_manager",
+      "id": "summary_delivery",
       "name": "전체 요약 및 전송",
-      "description": "바이브코딩에 사용되는 CSS/UI와 아키텍처의 프로토타입을 제공합니다",
+      "description": "프로토타입의 구조와 현재 범위를 한 번에 요약하고 전송 흐름을 시뮬레이션합니다.",
       "order": 1,
-      "enabled": true,
-      "category": "meta_project"
+      "category": "meta_project",
+      "enabled": true
     },
     {
-      "id": "other_manager",
+      "id": "architecture_notes",
       "name": "기타",
       "description": "CSS/UI 패턴과 로컬 아키텍처 프로토타입의 구성 요소를 확인합니다.",
       "order": 2,
-      "enabled": true,
-      "category": "meta_project"
-    },
-    {
-      "id": "flightradar24",
-      "name": "FlightRadar24",
-      "description": "호르무즈 구역 항공 트래픽 모니터링 스캐폴드",
-      "order": 10,
-      "enabled": true,
-      "category": "project",
-      "nav_category": "daily_monitor"
-    }
-  ],
-  "nav_categories": [
-    {
-      "id": "daily_monitor",
-      "name": "Daily Monitor",
-      "description": "매일 확인하는 모니터링 프로젝트",
-      "order": 1,
-      "collapsed": false
+      "category": "meta_project",
+      "enabled": true
     }
   ]
 }

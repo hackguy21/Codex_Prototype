@@ -6,64 +6,46 @@ ROOT_DIR = Path(__file__).resolve().parents[3]
 DATA_DIR = ROOT_DIR / "data" / "meta_project"
 SETTINGS_PATH = DATA_DIR / "settings.json"
 
-META_PROJECT = {
-    "id": "meta_project",
+ROOT_PROJECT = {
+    "id": "project_prototype",
     "name": "Project Prototype",
     "description": "바이브코딩에 사용되는 CSS/UI와 아키텍처의 프로토타입을 제공합니다",
     "order": 0,
-    "enabled": True,
     "category": "meta_project",
+    "enabled": True,
 }
-
-DEFAULT_NAV_CATEGORIES = [
-    {
-        "id": "daily_monitor",
-        "name": "Daily Monitor",
-        "description": "매일 확인하는 모니터링 프로젝트",
-        "order": 1,
-        "collapsed": False,
-    },
-]
 
 DEFAULT_PROJECTS = [
     {
-        "id": "daily_news_manager",
+        "id": "summary_delivery",
         "name": "전체 요약 및 전송",
-        "description": "바이브코딩에 사용되는 CSS/UI와 아키텍처의 프로토타입을 제공합니다",
+        "description": "프로토타입의 구조와 현재 범위를 한 번에 요약하고 전송 흐름을 시뮬레이션합니다.",
         "order": 1,
-        "enabled": True,
         "category": "meta_project",
+        "enabled": True,
     },
     {
-        "id": "other_manager",
+        "id": "architecture_notes",
         "name": "기타",
         "description": "CSS/UI 패턴과 로컬 아키텍처 프로토타입의 구성 요소를 확인합니다.",
         "order": 2,
-        "enabled": True,
         "category": "meta_project",
-    },
-    {
-        "id": "flightradar24",
-        "name": "FlightRadar24",
-        "description": "호르무즈 구역 항공 트래픽 모니터링 스캐폴드",
-        "order": 10,
         "enabled": True,
-        "category": "project",
-        "nav_category": "daily_monitor",
     },
 ]
 
-DEFAULT_SETTINGS = {
-    "selected_projects": ["flightradar24"],
-    "projects": DEFAULT_PROJECTS,
-    "nav_categories": DEFAULT_NAV_CATEGORIES,
-}
+DEFAULT_SETTINGS = {"projects": DEFAULT_PROJECTS}
+
+
+def settings_payload() -> dict:
+    settings = load_settings()
+    return {"projects": settings["projects"], "settings": settings}
 
 
 def load_settings() -> dict:
     if not SETTINGS_PATH.exists():
-        save_settings(DEFAULT_SETTINGS)
-    return _normalize_settings(_read_settings())
+        return save_settings(DEFAULT_SETTINGS)
+    return _normalize_settings(json.loads(SETTINGS_PATH.read_text(encoding="utf-8")))
 
 
 def save_settings(settings: dict) -> dict:
@@ -73,92 +55,40 @@ def save_settings(settings: dict) -> dict:
     return payload
 
 
-def project_catalog(include_meta: bool = False) -> list[dict]:
+def update_settings(payload: dict) -> dict:
+    current = load_settings()
+    merged = {"projects": payload.get("projects", current["projects"])}
+    saved = save_settings(merged)
+    return {"projects": saved["projects"], "settings": saved}
+
+
+def project_catalog(include_root: bool = False) -> list[dict]:
     projects = sorted(load_settings()["projects"], key=lambda item: item.get("order", 999))
-    if include_meta:
-        return [META_PROJECT.copy(), *projects]
+    if include_root:
+        return [ROOT_PROJECT.copy(), *projects]
     return projects
 
 
-def _read_settings() -> dict:
-    if not SETTINGS_PATH.exists():
-        return DEFAULT_SETTINGS.copy()
-    return json.loads(SETTINGS_PATH.read_text(encoding="utf-8"))
-
-
 def _normalize_settings(settings: dict) -> dict:
-    nav_categories = _normalize_nav_categories(settings.get("nav_categories", DEFAULT_NAV_CATEGORIES))
-    valid_nav_category_ids = {category["id"] for category in nav_categories}
-
-    defaults = {project["id"]: project for project in DEFAULT_PROJECTS}
-    incoming_projects = settings.get("projects", [])
     incoming_by_id = {
         str(project.get("id", "")).strip(): project
-        for project in incoming_projects
-        if str(project.get("id", "")).strip() in defaults
+        for project in settings.get("projects", [])
+        if str(project.get("id", "")).strip()
     }
-
     projects = []
-    for project_id, default in defaults.items():
-        incoming = incoming_by_id.get(project_id, {})
-        project = {
-            "id": project_id,
-            "name": str(incoming.get("name") or default["name"]).strip(),
-            "description": str(incoming.get("description") or default["description"]).strip(),
-            "order": _parse_int(incoming.get("order"), default["order"]),
-            "enabled": _parse_bool(incoming.get("enabled"), default["enabled"]),
-            "category": default["category"],
-        }
-        if default["category"] == "project":
-            project["nav_category"] = _normalize_nav_category(
-                incoming.get("nav_category") or default.get("nav_category"),
-                valid_nav_category_ids,
-            )
-        projects.append(project)
-
-    valid_ids = {
-        project["id"]
-        for project in projects
-        if project.get("enabled", True) and project.get("category") == "project"
-    }
-    selected = settings.get("selected_projects", DEFAULT_SETTINGS["selected_projects"])
-    selected_projects = [project_id for project_id in selected if project_id in valid_ids]
-
-    return {
-        "selected_projects": selected_projects,
-        "projects": projects,
-        "nav_categories": nav_categories,
-    }
-
-
-def _normalize_nav_categories(categories: list[dict]) -> list[dict]:
-    defaults = {category["id"]: category for category in DEFAULT_NAV_CATEGORIES}
-    incoming_by_id = {
-        str(category.get("id", "")).strip(): category
-        for category in categories
-        if str(category.get("id", "")).strip() in defaults
-    }
-
-    normalized = []
-    for category_id, default in defaults.items():
-        incoming = incoming_by_id.get(category_id, {})
-        normalized.append(
+    for default in DEFAULT_PROJECTS:
+        incoming = incoming_by_id.get(default["id"], {})
+        projects.append(
             {
-                "id": category_id,
+                "id": default["id"],
                 "name": str(incoming.get("name") or default["name"]).strip(),
                 "description": str(incoming.get("description") or default["description"]).strip(),
                 "order": _parse_int(incoming.get("order"), default["order"]),
-                "collapsed": _parse_bool(incoming.get("collapsed"), default["collapsed"]),
+                "category": default["category"],
+                "enabled": _parse_bool(incoming.get("enabled"), default["enabled"]),
             }
         )
-    return sorted(normalized, key=lambda item: item.get("order", 999))
-
-
-def _normalize_nav_category(value: str | None, valid_ids: set[str]) -> str:
-    candidate = str(value or "daily_monitor").strip()
-    if candidate in valid_ids:
-        return candidate
-    return "daily_monitor"
+    return {"projects": projects}
 
 
 def _parse_int(value: object, fallback: int) -> int:
