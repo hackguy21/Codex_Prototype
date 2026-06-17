@@ -26,10 +26,18 @@ DEFAULT_PROJECTS = [
     },
     {
         "id": "architecture_notes",
-        "name": "기타",
+        "name": "코드구조 및 현재규칙",
         "description": "CSS/UI 패턴과 로컬 아키텍처 프로토타입의 구성 요소를 확인합니다.",
         "order": 2,
         "category": "meta_project",
+        "enabled": True,
+    },
+    {
+        "id": "example_1",
+        "name": "example_1",
+        "description": "normal_project 아래에 추가되는 일반 프로젝트 예시입니다.",
+        "order": 101,
+        "category": "normal_project",
         "enabled": True,
     },
 ]

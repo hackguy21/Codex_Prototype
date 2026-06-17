@@ -1,0 +1,1 @@
+"""Example normal project module."""

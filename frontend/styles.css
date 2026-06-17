@@ -559,6 +559,28 @@ textarea {
   gap: 12px;
 }
 
+.project-list-group {
+  display: grid;
+  gap: 10px;
+}
+
+.project-list-group-head {
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  gap: 4px;
+  padding-bottom: 8px;
+}
+
+.project-list-group-head strong {
+  color: var(--accent-strong);
+  font-size: 13px;
+}
+
+.project-list-group-head small {
+  color: var(--muted);
+  line-height: 1.4;
+}
+
 .item-card {
   background: #fbfcfe;
   border: 1px solid var(--line);

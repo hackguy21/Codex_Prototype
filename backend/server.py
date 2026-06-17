@@ -1,5 +1,6 @@
 import json
 import mimetypes
+import os
 import sys
 from datetime import datetime, timezone
 from http import HTTPStatus
@@ -98,14 +99,25 @@ class ProjectPrototypeHandler(BaseHTTPRequestHandler):
 
 def prototype_summary(simulate_send: bool = False) -> dict:
     projects = project_catalog()
+    meta_projects = [project for project in projects if project.get("category") == "meta_project"]
+    normal_projects = [project for project in projects if project.get("category") == "normal_project"]
     lines = [
         "# Project Prototype 전체 요약",
         "",
         "바이브코딩에 사용되는 CSS/UI와 아키텍처의 프로토타입을 제공합니다.",
         "",
-        "## 구성",
+        "## META PROJECT",
+        "프로젝트를 설명, 요약, 관리하는 메타 화면입니다.",
     ]
-    lines.extend(f"- {project['name']}: {project['description']}" for project in projects)
+    lines.extend(f"- {project['name']}: {project['description']}" for project in meta_projects)
+    lines.extend(
+        [
+            "",
+            "## NORMAL PROJECT",
+            "일반 기능 구현과 사용자용 실험 프로젝트가 들어갑니다.",
+        ]
+    )
+    lines.extend(f"- {project['name']}: {project['description']}" for project in normal_projects)
     lines.extend(
         [
             "",
@@ -127,7 +139,7 @@ def prototype_summary(simulate_send: bool = False) -> dict:
 
 def main() -> None:
     host = "127.0.0.1"
-    port = 8000
+    port = int(os.environ.get("PORT", "8000"))
     server = ThreadingHTTPServer((host, port), ProjectPrototypeHandler)
     safe_print(f"Project Prototype running at http://{host}:{port}")
     server.serve_forever()

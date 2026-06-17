@@ -36,7 +36,20 @@
               </button>
               <button class="nav-item" data-project="architecture_notes">
                 <span>메타프로젝트 2</span>
-                <strong>기타</strong>
+                <strong>코드구조 및 현재규칙</strong>
+              </button>
+            </div>
+          </section>
+
+          <section class="nav-category">
+            <button class="nav-category-head" type="button" aria-expanded="true">
+              <span>NORMAL PROJECT</span>
+              <strong>1</strong>
+            </button>
+            <div class="nav-category-items">
+              <button class="nav-item" data-project="example_1">
+                <span>일반프로젝트 1</span>
+                <strong>example_1</strong>
               </button>
             </div>
           </section>
@@ -59,7 +72,7 @@
           <div class="project-grid">
             <section class="panel">
               <div class="section-head">
-                <h3>메타프로젝트</h3>
+                <h3>프로젝트 목록</h3>
                 <span id="summaryProjectCount" class="muted"></span>
               </div>
               <div id="summaryProjectList" class="item-list"></div>
@@ -79,7 +92,7 @@
         <section id="architecture_notes" class="project-view">
           <header class="project-header">
             <div>
-              <h2>기타</h2>
+              <h2>코드구조 및 현재규칙</h2>
               <p>CSS/UI 패턴과 로컬 아키텍처 프로토타입의 구성 요소를 확인합니다.</p>
             </div>
           </header>
@@ -92,10 +105,10 @@
               <div class="standard-panel plain-standard-panel">
                 <ul>
                   <li><strong>frontend/</strong>: 사이드바, 패널, 리스트, 결과 영역 등 바이브코딩용 UI 패턴</li>
-                  <li><strong>frontend/styles.css</strong>: 재사용 가능한 레이아웃, 카드, 버튼, 상태 표시 스타일</li>
-                  <li><strong>frontend/app.js</strong>: 화면 상태, API 호출, 렌더링, 기본 상호작용 핸들러</li>
                   <li><strong>backend/server.py</strong>: 정적 파일 제공과 JSON API 라우팅을 담당하는 표준 라이브러리 서버</li>
-                  <li><strong>backend/projects/meta_project/</strong>: 프로젝트 카탈로그와 설정 정규화</li>
+                  <li><strong>backend/projects/meta_project/</strong>: 메타프로젝트 카탈로그, 카테고리 구분, 설정 정규화</li>
+                  <li><strong>backend/projects/normal_project/</strong>: 일반 기능 프로젝트가 추가되는 기본 위치</li>
+                  <li><strong>backend/projects/normal_project/example_1/</strong>: NORMAL PROJECT에 등록된 첫 예시 프로젝트</li>
                   <li><strong>data/meta_project/</strong>: 화면 구성과 프로토타입 설정을 보관하는 JSON 저장소</li>
                 </ul>
               </div>
@@ -103,16 +116,49 @@
 
             <section class="panel results-panel">
               <div class="section-head">
-                <h3>현재 기능</h3>
+                <h3>현재 규칙</h3>
               </div>
               <div class="standard-panel plain-standard-panel">
                 <ul>
-                  <li><strong>Project Prototype</strong>: 바이브코딩에 사용할 CSS/UI와 아키텍처 샘플 제공</li>
-                  <li><strong>전체 요약 및 전송</strong>: 프로젝트 구조 요약과 전송 흐름 시뮬레이션</li>
-                  <li><strong>UI 스캐폴드</strong>: 실제 도메인 로직을 붙이기 전 사용할 기본 화면과 API 연결 구조</li>
-                  <li><strong>확장 지점</strong>: 새 프로젝트, 데이터 저장소, 실행 어댑터를 추가할 수 있는 최소 폴더 구조</li>
+                  <li><strong>META PROJECT</strong>: 전체 요약, 구조 설명, 설정 관리처럼 워크스페이스를 관리하는 화면 그룹</li>
+                  <li><strong>NORMAL PROJECT</strong>: 사용자가 일반적으로 추가하는 기능 프로젝트가 들어가는 화면 그룹</li>
+                  <li><strong>category</strong>: 카탈로그의 `meta_project`와 `normal_project` 값으로 두 그룹을 구분</li>
+                  <li><strong>normal_project</strong>: 바이브코딩이나 수작업으로 구현한 일반 기능 코드를 우선 담는 backend 폴더</li>
+                  <li><strong>example_1</strong>: NORMAL PROJECT와 `backend/projects/normal_project/example_1/`의 연결 예시</li>
                 </ul>
               </div>
+            </section>
+          </div>
+        </section>
+
+        <section id="example_1" class="project-view">
+          <header class="project-header">
+            <div>
+              <h2>example_1</h2>
+              <p>normal_project 아래에 추가되는 일반 프로젝트 예시입니다.</p>
+            </div>
+          </header>
+
+          <div class="project-grid">
+            <section class="panel">
+              <div class="section-head">
+                <h3>위치</h3>
+              </div>
+              <div class="standard-panel plain-standard-panel">
+                <ul>
+                  <li><strong>backend/projects/normal_project/example_1/</strong>: 이 프로젝트의 백엔드 코드 위치</li>
+                  <li><strong>NORMAL PROJECT</strong>: 프론트 네비게이션에서 일반 프로젝트를 모아두는 그룹</li>
+                  <li><strong>확장 방식</strong>: 새 일반 프로젝트는 `normal_project` 아래에 폴더를 추가하고 이 네비게이션 그룹에 연결합니다.</li>
+                </ul>
+              </div>
+            </section>
+
+            <section class="panel results-panel">
+              <div class="section-head">
+                <h3>상태</h3>
+              </div>
+              <div class="status">예시 프로젝트 슬롯입니다. 아직 실행 로직은 없습니다.</div>
+              <textarea readonly placeholder="example_1의 결과 출력 영역입니다."></textarea>
             </section>
           </div>
         </section>

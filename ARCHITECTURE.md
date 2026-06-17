@@ -7,12 +7,15 @@ Project Prototype provides a CSS/UI and architecture prototype for vibe-coding w
 ```text
 META PROJECT
   메타프로젝트 1  전체 요약 및 전송
-  메타프로젝트 2  기타
+  메타프로젝트 2  코드구조 및 현재규칙
+
+NORMAL PROJECT
+  일반프로젝트 1  example_1
 ```
 
-`전체 요약 및 전송` generates a local summary of the prototype and simulates a send flow without contacting an external service.
+`META PROJECT` contains screens that explain, summarize, or manage the prototype itself.
 
-`기타` documents the visible structure and extension points of the prototype.
+`NORMAL PROJECT` contains ordinary feature projects. New feature work added through vibe-coding or manual implementation should normally appear under this navigation group.
 
 ## Current Layers
 
@@ -26,8 +29,9 @@ backend/
   server.py       Standard-library HTTP API and static file server
   projects/
     meta_project/
-      config.py        Project catalog and settings normalization
-    normal_project/    Holding area for manually added prototype feature code
+      config.py   Project catalog and settings normalization
+    normal_project/
+      example_1/  First example ordinary project slot
 
 data/
   meta_project/
@@ -62,16 +66,24 @@ When adding a new prototype module:
 2. Persist matching settings in `data/meta_project/settings.json` when needed.
 3. Add the visible view in `frontend/index.html`.
 4. Add rendering and API behavior in `frontend/app.js`.
-5. Put new hand-written or vibe-coded backend feature code under `backend/projects/normal_project/` first.
-6. Move code out of `normal_project` only when it becomes a stable standalone project boundary that deserves its own module.
+5. Put new ordinary backend feature code under `backend/projects/normal_project/<project_id>/` first.
+6. Add ordinary feature projects to the `NORMAL PROJECT` navigation group.
+7. Move code out of `normal_project` only when it becomes a stable standalone boundary that deserves a different module layout.
 
 Keep new UI work aligned with the existing sidebar, panel, compact list, and result-output patterns. The point of this repository is to make future experiments feel coherent quickly.
 
 ## Normal Project Rule
 
-`backend/projects/normal_project/` is the default backend workspace for additional manual implementation.
+`backend/projects/normal_project/` is the default backend workspace for ordinary feature implementation.
 
-Use it for specific functions, experiments, adapters, or helper modules added during vibe-coding. Each feature should live in a small clearly named file or subdirectory inside `normal_project`. Avoid creating new top-level project packages until the feature has a clear, reusable boundary.
+Use it for specific functions, experiments, adapters, or helper modules added during vibe-coding. Each normal project should live in a clearly named subdirectory such as `backend/projects/normal_project/example_1/`.
+
+The frontend should mirror this distinction:
+
+- `META PROJECT`: management, summary, architecture, and workspace-level screens.
+- `NORMAL PROJECT`: ordinary feature projects and user-facing experiments.
+
+Avoid creating new top-level project packages until the feature has a clear, reusable boundary.
 
 ## Removed Legacy Scope
 
