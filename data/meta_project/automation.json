@@ -1,0 +1,14 @@
+{
+  "enabled": false,
+  "timezone": "Asia/Seoul",
+  "times": [
+    {
+      "time": "09:00",
+      "enabled": true
+    },
+    {
+      "time": "18:00",
+      "enabled": true
+    }
+  ]
+}

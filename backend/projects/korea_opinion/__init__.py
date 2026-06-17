@@ -1,0 +1,1 @@
+"""Korean opinion scraper project."""

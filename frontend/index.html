@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project Hormuz Workspace</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="workspace">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-row">
+            <div>
+              <h1>Project Hormuz</h1>
+              <p>Monitoring Workspace</p>
+            </div>
+            <button id="sidebarMenuButton" class="menu-toggle" type="button" aria-label="메뉴 열기/닫기" aria-expanded="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+
+        <nav id="projectNavigation" class="project-nav" aria-label="프로젝트 선택">
+          <section class="nav-category">
+            <button class="nav-category-head" type="button" aria-expanded="true">
+              <span>META PROJECT</span>
+              <strong>2</strong>
+            </button>
+            <div class="nav-category-items">
+              <button class="nav-item active" data-project="daily_news_manager">
+                <span>메타프로젝트 1</span>
+                <strong>수집 및 요약 / 전송</strong>
+              </button>
+              <button class="nav-item" data-project="other_manager">
+                <span>메타프로젝트 2</span>
+                <strong>기타</strong>
+              </button>
+            </div>
+          </section>
+          <section class="nav-category">
+            <button class="nav-category-head" type="button" aria-expanded="true">
+              <span>Daily Monitor</span>
+              <strong>2</strong>
+            </button>
+            <div class="nav-category-items">
+              <button class="nav-item" data-project="flightradar24">
+                <span>프로젝트 1</span>
+                <strong>FlightRadar24</strong>
+              </button>
+              <button class="nav-item" data-project="marine_traffic">
+                <span>프로젝트 2</span>
+                <strong>MarineTraffic</strong>
+              </button>
+            </div>
+          </section>
+        </nav>
+      </aside>
+
+      <main class="main">
+        <section id="daily_news_manager" class="project-view active">
+          <header class="project-header">
+            <div>
+              <h2>수집 및 요약 / 전송</h2>
+              <p>Daily Monitor 프로젝트의 현재 스캐폴드 상태를 수집하고, 통합 요약 또는 텔레그램 전송을 실행합니다.</p>
+            </div>
+            <div class="header-actions">
+              <button id="dailyNewsScrapeButton" class="primary" type="button">수집 및 요약</button>
+              <button id="dailyNewsTelegramButton" class="primary secondary-action" type="button">수집 및 요약 후 텔레그램 전송</button>
+            </div>
+          </header>
+
+          <div class="project-grid">
+            <section class="panel">
+              <div class="section-head">
+                <h3>Daily Monitor 프로젝트</h3>
+                <span id="dailyNewsProjectCount" class="muted"></span>
+              </div>
+              <div id="dailyNewsProjectList" class="checkbox-list"></div>
+            </section>
+
+            <section class="panel results-panel">
+              <div class="section-head">
+                <h3>통합 결과</h3>
+                <button id="dailyNewsCopyButton" class="ghost" type="button" disabled>텍스트 복사</button>
+              </div>
+              <div id="dailyNewsStatus" class="status">아직 수집 전입니다.</div>
+              <textarea id="dailyNewsTextOutput" readonly placeholder="FlightRadar24와 MarineTraffic의 통합 모니터링 요약이 여기에 표시됩니다."></textarea>
+              <div id="dailyNewsResults" class="item-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="other_manager" class="project-view">
+          <header class="project-header">
+            <div>
+              <h2>기타</h2>
+              <p>Project Hormuz의 현재 구조와 구현 경계를 확인합니다.</p>
+            </div>
+          </header>
+
+          <div class="project-grid">
+            <section class="panel">
+              <div class="section-head">
+                <h3>코드 구조</h3>
+              </div>
+              <div class="standard-panel plain-standard-panel">
+                <ul>
+                  <li><strong>frontend/</strong>: 프로젝트 네비게이션, 모니터링 패널, 결과 표시 UI</li>
+                  <li><strong>backend/server.py</strong>: 정적 파일 제공과 JSON API 라우팅</li>
+                  <li><strong>backend/projects/meta_project/</strong>: 메타 프로젝트 설정, 선택 프로젝트 실행, 텔레그램 전송 흐름</li>
+                  <li><strong>backend/projects/traffic_monitor/</strong>: 구역 설정과 FlightRadar24/MarineTraffic 스캐폴드 응답</li>
+                  <li><strong>data/</strong>: 메타 설정과 구역 설정 JSON 저장소</li>
+                </ul>
+              </div>
+            </section>
+
+            <section class="panel results-panel">
+              <div class="section-head">
+                <h3>현재 기능</h3>
+              </div>
+              <div class="standard-panel plain-standard-panel">
+                <ul>
+                  <li><strong>META PROJECT</strong>: Daily Monitor 프로젝트의 수집 및 요약, 텔레그램 전송</li>
+                  <li><strong>FlightRadar24</strong>: 호르무즈 구역 항공 모니터링 스캐폴드</li>
+                  <li><strong>MarineTraffic</strong>: 호르무즈 구역 해상 모니터링 스캐폴드</li>
+                  <li><strong>보류된 구현</strong>: 실제 캡처, 이미지 저장, 변화 감지, 텔레그램 이미지 전송</li>
+                </ul>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section id="flightradar24" class="project-view">
+          <header class="project-header">
+            <div>
+              <h2>FlightRadar24</h2>
+              <p>호르무즈 구역 항공 트래픽 모니터링 스캐폴드</p>
+            </div>
+            <button id="flightMonitorButton" class="primary" type="button">모니터링 평가</button>
+          </header>
+
+          <div class="project-grid">
+            <section class="panel">
+              <div class="section-head">
+                <h3>구역 설정</h3>
+                <div class="section-actions">
+                  <span id="flightZoneCount" class="muted"></span>
+                  <button class="ghost panel-toggle" type="button" data-toggle-target="flightZonePanelBody">접기</button>
+                </div>
+              </div>
+              <div id="flightZonePanelBody" class="panel-body">
+                <div id="flightZones" class="item-list"></div>
+              </div>
+            </section>
+
+            <section class="panel results-panel">
+              <div class="section-head">
+                <h3>항공 모니터링 결과</h3>
+                <button id="flightCopyButton" class="ghost" type="button" disabled>텍스트 복사</button>
+              </div>
+              <div id="flightStatus" class="status">아직 모니터링 전입니다.</div>
+              <textarea id="flightTextOutput" readonly placeholder="FlightRadar24 모니터링 계획과 상태가 여기에 표시됩니다."></textarea>
+              <div id="flightSnapshots" class="item-list"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="marine_traffic" class="project-view">
+          <header class="project-header">
+            <div>
+              <h2>MarineTraffic</h2>
+              <p>호르무즈 구역 해상 트래픽 모니터링 스캐폴드</p>
+            </div>
+            <button id="marineMonitorButton" class="primary" type="button">모니터링 평가</button>
+          </header>
+
+          <div class="project-grid">
+            <section class="panel">
+              <div class="section-head">
+                <h3>구역 설정</h3>
+                <div class="section-actions">
+                  <span id="marineZoneCount" class="muted"></span>
+                  <button class="ghost panel-toggle" type="button" data-toggle-target="marineZonePanelBody">접기</button>
+                </div>
+              </div>
+              <div id="marineZonePanelBody" class="panel-body">
+                <div id="marineZones" class="item-list"></div>
+              </div>
+            </section>
+
+            <section class="panel results-panel">
+              <div class="section-head">
+                <h3>해상 모니터링 결과</h3>
+                <button id="marineCopyButton" class="ghost" type="button" disabled>텍스트 복사</button>
+              </div>
+              <div id="marineStatus" class="status">아직 모니터링 전입니다.</div>
+              <textarea id="marineTextOutput" readonly placeholder="MarineTraffic 모니터링 계획과 상태가 여기에 표시됩니다."></textarea>
+              <div id="marineSnapshots" class="item-list"></div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+[
+  {
+    "id": "strait-of-hormuz",
+    "name": "Strait of Hormuz",
+    "region": "Hormuz",
+    "enabled": true,
+    "aircraft_enabled": true,
+    "vessel_enabled": true,
+    "refresh_minutes": 15,
+    "notes": "Primary watch area for paired aviation and maritime snapshots."
+  }
+]
