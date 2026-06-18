@@ -39,14 +39,19 @@ data/
     settings.json Persisted project catalog overrides
 
 scripts/
-  windows/        Optional local launch helpers
+  windows/        Optional local setup and launch helpers
+
+requirements.txt  Shared runtime dependency list for future modules
+pyproject.toml    Project metadata, including the Python 3.11+ requirement
 ```
 
 ## Runtime Shape
 
 The frontend is static and framework-free. It calls a few JSON endpoints and renders the returned data into reusable UI primitives such as panels, lists, status text, textareas, and action buttons.
 
-The backend uses only Python standard-library modules. `backend/server.py` serves frontend files, validates JSON request bodies, and exposes the prototype API.
+The backend uses only Python standard-library modules today. `backend/server.py` serves frontend files, validates JSON request bodies, and exposes the prototype API.
+
+Python execution should move through the local `.venv` virtual environment once it has been created with `scripts/windows/setup_venv.ps1`. Future third-party runtime packages should be added to `requirements.txt`; development-only packages should be added to `requirements-dev.txt`.
 
 Project catalog data lives in `backend/projects/meta_project/config.py` and can be persisted through `data/meta_project/settings.json`.
 
@@ -84,5 +89,4 @@ The frontend should mirror this distinction:
 - `NORMAL PROJECT`: ordinary feature projects and user-facing experiments.
 
 Avoid creating new top-level project packages until the feature has a clear, reusable boundary.
-
 

@@ -4,24 +4,55 @@ Project Prototype provides a local CSS/UI and architecture prototype for vibe-co
 
 ## Requirements
 
-- Python 3.11 or newer recommended
-- No external Python package required
+- Python 3.11 or newer
+- A local virtual environment in `.venv` is recommended for all future modules
+- No external Python package required yet; add shared runtime packages to `requirements.txt`
 - Browser access to `http://127.0.0.1:8000` in Default, but Sometimes it needs to be run in adjacent port like 8001 or more
+
+## Virtual Environment
+
+Create or refresh the local virtual environment:
+
+```powershell
+cd "C:\Users\hyseong97\Documents\ProjectPrototype"
+.\scripts\windows\setup_venv.ps1
+```
+
+The setup script:
+
+- finds Python 3.11 or newer
+- creates `.venv` when it does not exist
+- upgrades `pip`
+- installs packages from `requirements.txt`
+
+If Python 3.11+ is not on `PATH`, point the setup script at a specific interpreter:
+
+```powershell
+$env:PROJECT_PROTOTYPE_PYTHON = "C:\Path\To\Python311\python.exe"
+.\scripts\windows\setup_venv.ps1
+```
+
+Use the virtual environment directly when adding future modules:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r .\requirements.txt
+.\.venv\Scripts\python.exe .\backend\server.py
+```
 
 ## Run
 
 ```powershell
 cd "C:\Users\hyseong97\Documents\ProjectPrototype"
-python .\backend\server.py
+.\scripts\windows\run_project_prototype.ps1
 ```
 
-With the Codex bundled Python runtime:
+Without the helper script:
 
 ```powershell
-& 'C:\Users\hyseong97\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' .\backend\server.py
+.\.venv\Scripts\python.exe .\backend\server.py
 ```
 
-- this runtime in valid only in user 'hyseong97'
+If `.venv` has not been created yet, the run helper falls back to `python`.
 
 ## Current UI
 
@@ -44,7 +75,7 @@ The sidebar contains one category:
 ## Verification
 
 ```powershell
-& 'C:\Users\hyseong97\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m py_compile .\backend\server.py .\backend\projects\meta_project\config.py
+.\.venv\Scripts\python.exe -m py_compile .\backend\server.py .\backend\projects\meta_project\config.py
 node --check .\frontend\app.js
 git diff --check
 ```

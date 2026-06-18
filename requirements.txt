@@ -1,0 +1,4 @@
+# Runtime dependencies for Project Prototype.
+#
+# The current prototype intentionally uses only the Python standard library.
+# Add third-party packages here as modules become stable enough to share.

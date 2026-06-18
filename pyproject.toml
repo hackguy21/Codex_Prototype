@@ -1,0 +1,10 @@
+[project]
+name = "project-prototype"
+version = "0.2.0"
+description = "Local CSS/UI and architecture prototype for vibe-coding workflows."
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.project-prototype]
+venv = ".venv"
+entrypoint = "backend/server.py"

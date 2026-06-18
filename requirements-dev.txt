@@ -1,0 +1,3 @@
+-r requirements.txt
+
+# Development and verification dependencies can be added here.
