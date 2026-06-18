@@ -6,7 +6,7 @@ Project Prototype provides a local CSS/UI and architecture prototype for vibe-co
 
 - Python 3.11 or newer recommended
 - No external Python package required
-- Browser access to `http://127.0.0.1:8000`
+- Browser access to `http://127.0.0.1:8000` in Default, but Sometimes it needs to be run in adjacent port like 8001 or more
 
 ## Run
 
@@ -21,6 +21,8 @@ With the Codex bundled Python runtime:
 & 'C:\Users\hyseong97\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' .\backend\server.py
 ```
 
+- this runtime in valid only in user 'hyseong97'
+
 ## Current UI
 
 The sidebar contains one category:
@@ -29,15 +31,15 @@ The sidebar contains one category:
 
 `META PROJECT` contains:
 
-- `메타프로젝트 1`: `전체 요약 및 전송`
-- `메타프로젝트 2`: `기타`
+- `메타프로젝트 1`: `전체 프로젝트 요약`
+- `메타프로젝트 2`: `코드구조 및 현재규칙`
+- `메타프로젝트 3`: `수집정보 외부 전송`
 
 ## API
 
 - `GET /api/projects`
 - `GET /api/meta_project/settings`
 - `POST /api/meta_project/settings`
-- `POST /api/prototype/summary`
 
 ## Verification
 

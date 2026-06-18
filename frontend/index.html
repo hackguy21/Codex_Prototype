@@ -27,16 +27,20 @@
           <section class="nav-category">
             <button class="nav-category-head" type="button" aria-expanded="true">
               <span>META PROJECT</span>
-              <strong>2</strong>
+              <strong>3</strong>
             </button>
             <div class="nav-category-items">
               <button class="nav-item active" data-project="summary_delivery">
                 <span>메타프로젝트 1</span>
-                <strong>전체 요약 및 전송</strong>
+                <strong>전체 프로젝트 요약</strong>
               </button>
               <button class="nav-item" data-project="architecture_notes">
                 <span>메타프로젝트 2</span>
                 <strong>코드구조 및 현재규칙</strong>
+              </button>
+              <button class="nav-item" data-project="information_send">
+                <span>메타프로젝트 3</span>
+                <strong>수집정보 외부 전송</strong>
               </button>
             </div>
           </section>
@@ -60,12 +64,8 @@
         <section id="summary_delivery" class="project-view active">
           <header class="project-header">
             <div>
-              <h2>전체 요약 및 전송</h2>
-              <p>프로토타입의 구조와 현재 범위를 한 번에 요약하고 전송 흐름을 시뮬레이션합니다.</p>
-            </div>
-            <div class="header-actions">
-              <button id="summaryButton" class="primary" type="button">전체 요약</button>
-              <button id="sendSimulationButton" class="primary secondary-action" type="button">전송 시뮬레이션</button>
+              <h2>전체 프로젝트 요약</h2>
+              <p>META PROJECT와 NORMAL PROJECT를 구분해 현재 프로젝트 구성을 요약합니다.</p>
             </div>
           </header>
 
@@ -76,15 +76,6 @@
                 <span id="summaryProjectCount" class="muted"></span>
               </div>
               <div id="summaryProjectList" class="item-list"></div>
-            </section>
-
-            <section class="panel results-panel">
-              <div class="section-head">
-                <h3>요약 결과</h3>
-                <button id="summaryCopyButton" class="ghost" type="button" disabled>텍스트 복사</button>
-              </div>
-              <div id="summaryStatus" class="status">아직 요약 전입니다.</div>
-              <textarea id="summaryTextOutput" readonly placeholder="Project Prototype 전체 요약이 여기에 표시됩니다."></textarea>
             </section>
           </div>
         </section>
@@ -124,12 +115,80 @@
                   <li><strong>NORMAL PROJECT</strong>: 사용자가 일반적으로 추가하는 기능 프로젝트가 들어가는 화면 그룹</li>
                   <li><strong>category</strong>: 카탈로그의 `meta_project`와 `normal_project` 값으로 두 그룹을 구분</li>
                   <li><strong>normal_project</strong>: 바이브코딩이나 수작업으로 구현한 일반 기능 코드를 우선 담는 backend 폴더</li>
-                  <li><strong>example_1</strong>: NORMAL PROJECT와 `backend/projects/normal_project/example_1/`의 연결 예시</li>
+                  <li><strong>example_1</strong>: NORMAL PROJECT와 `backend/projects/normal_project/example_1/`의 예시 프로젝트</li>
                 </ul>
               </div>
             </section>
           </div>
         </section>
+
+        <section id="information_send" class="project-view">
+  <header class="project-header">
+    <div>
+      <h2>수집정보 외부 전송</h2>
+      <p>일반 프로젝트에서 수집한 정보를 외부 API, 웹훅, 파일 저장소 등으로 전송하기 전 내용을 정리하는 메타 프로젝트입니다.</p>
+    </div>
+  </header>
+
+  <div class="project-grid">
+    <section class="panel">
+      <div class="section-head">
+        <h3>프로젝트 설명</h3>
+      </div>
+
+      <div class="standard-panel plain-standard-panel">
+        <ul>
+          <li><strong>목적</strong>: 각 NORMAL PROJECT에서 수집한 결과물을 외부로 보낼 수 있도록 정리합니다.</li>
+          <li><strong>입력</strong>: 전송 대상, 전송 방식, 수집 정보, 설명 메모를 입력합니다.</li>
+          <li><strong>출력</strong>: 전송 전에 확인할 요약 내용이나 결과 메시지를 표시합니다.</li>
+          <li><strong>현재 상태</strong>: 프론트엔드 화면 슬롯만 만든 상태이며, 실제 전송 로직은 아직 연결하지 않습니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel results-panel">
+      <div class="section-head">
+        <h3>전송 정보 입력</h3>
+      </div>
+
+      <div class="stack-form">
+        <label>
+          전송 대상 이름
+          <input type="text" placeholder="예: Notion, Google Sheet, 외부 API 서버" />
+        </label>
+
+        <label>
+          전송 대상 URL
+          <input type="url" placeholder="예: https://example.com/webhook" />
+        </label>
+
+        <label>
+          전송 방식
+          <select>
+            <option>POST 요청</option>
+            <option>파일 저장</option>
+            <option>클립보드 복사</option>
+            <option>아직 미정</option>
+          </select>
+        </label>
+
+        <label>
+          수집 정보
+          <textarea class="compact-textarea" placeholder="여기에 외부로 보낼 수집 정보를 입력합니다."></textarea>
+        </label>
+
+        <label>
+          설명 메모
+          <textarea class="compact-textarea" placeholder="전송 목적, 주의사항, 데이터 출처 등을 적습니다."></textarea>
+        </label>
+      </div>
+
+      <div class="status">아직 실제 전송 기능은 연결되어 있지 않습니다.</div>
+      <textarea readonly placeholder="전송 결과나 미리보기 내용이 여기에 표시됩니다."></textarea>
+    </section>
+  </div>
+</section>
+
 
         <section id="example_1" class="project-view">
           <header class="project-header">

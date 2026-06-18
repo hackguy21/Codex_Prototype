@@ -2,7 +2,6 @@ import json
 import mimetypes
 import os
 import sys
-from datetime import datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -43,10 +42,6 @@ class ProjectPrototypeHandler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         if parsed.path == "/api/meta_project/settings":
             self._json(update_settings(self._read_json(default={})))
-            return
-        if parsed.path == "/api/prototype/summary":
-            payload = self._read_json(default={})
-            self._json(prototype_summary(simulate_send=bool(payload.get("simulate_send"))))
             return
         self._json({"error": "Not found"}, status=HTTPStatus.NOT_FOUND)
 
@@ -95,46 +90,6 @@ class ProjectPrototypeHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(content)))
         self.end_headers()
         self.wfile.write(content)
-
-
-def prototype_summary(simulate_send: bool = False) -> dict:
-    projects = project_catalog()
-    meta_projects = [project for project in projects if project.get("category") == "meta_project"]
-    normal_projects = [project for project in projects if project.get("category") == "normal_project"]
-    lines = [
-        "# Project Prototype 전체 요약",
-        "",
-        "바이브코딩에 사용되는 CSS/UI와 아키텍처의 프로토타입을 제공합니다.",
-        "",
-        "## META PROJECT",
-        "프로젝트를 설명, 요약, 관리하는 메타 화면입니다.",
-    ]
-    lines.extend(f"- {project['name']}: {project['description']}" for project in meta_projects)
-    lines.extend(
-        [
-            "",
-            "## NORMAL PROJECT",
-            "일반 기능 구현과 사용자용 실험 프로젝트가 들어갑니다.",
-        ]
-    )
-    lines.extend(f"- {project['name']}: {project['description']}" for project in normal_projects)
-    lines.extend(
-        [
-            "",
-            "## 현재 범위",
-            "- 정적 HTML/CSS/JavaScript 프론트엔드",
-            "- Python 표준 라이브러리 기반 로컬 API 서버",
-            "- JSON 파일 기반 프로젝트 설정",
-            "- 새 프로젝트를 붙이기 쉬운 최소 폴더 구조",
-        ]
-    )
-    return {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "sent": simulate_send,
-        "message": "전송 시뮬레이션이 완료되었습니다." if simulate_send else "요약을 생성했습니다.",
-        "summary": "\n".join(lines),
-        "projects": projects,
-    }
 
 
 def main() -> None:

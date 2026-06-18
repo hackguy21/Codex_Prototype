@@ -6,8 +6,9 @@ Project Prototype provides a CSS/UI and architecture prototype for vibe-coding w
 
 ```text
 META PROJECT
-  메타프로젝트 1  전체 요약 및 전송
+  메타프로젝트 1  전체 프로젝트 요약
   메타프로젝트 2  코드구조 및 현재규칙
+  메타프로젝트 3  수집정보 외부 전송
 
 NORMAL PROJECT
   일반프로젝트 1  example_1
@@ -54,7 +55,6 @@ Project catalog data lives in `backend/projects/meta_project/config.py` and can 
 - `GET /api/projects`
 - `GET /api/meta_project/settings`
 - `POST /api/meta_project/settings`
-- `POST /api/prototype/summary`
 
 API handlers should return JSON, keep validation local and explicit, and avoid external dependencies unless the prototype intentionally grows into a product.
 
@@ -85,13 +85,4 @@ The frontend should mirror this distinction:
 
 Avoid creating new top-level project packages until the feature has a clear, reusable boundary.
 
-## Removed Legacy Scope
 
-This refactor intentionally removes the earlier domain-specific scaffolds:
-
-- no scraper modules
-- no Telegram or OpenAI integration
-- no scheduled automation loop
-- no provider-specific monitor UI
-- no traffic zone configuration
-- no external provider credentials

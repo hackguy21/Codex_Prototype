@@ -18,8 +18,8 @@ ROOT_PROJECT = {
 DEFAULT_PROJECTS = [
     {
         "id": "summary_delivery",
-        "name": "전체 요약 및 전송",
-        "description": "프로토타입의 구조와 현재 범위를 한 번에 요약하고 전송 흐름을 시뮬레이션합니다.",
+        "name": "전체 프로젝트 요약",
+        "description": "META PROJECT와 NORMAL PROJECT를 구분해 현재 프로젝트 구성을 요약합니다.",
         "order": 1,
         "category": "meta_project",
         "enabled": True,
@@ -29,6 +29,14 @@ DEFAULT_PROJECTS = [
         "name": "코드구조 및 현재규칙",
         "description": "CSS/UI 패턴과 로컬 아키텍처 프로토타입의 구성 요소를 확인합니다.",
         "order": 2,
+        "category": "meta_project",
+        "enabled": True,
+    },
+    {
+        "id": "information_send",
+        "name": "수집정보 외부 전송",
+        "description": "일반 프로젝트에서 수집한 정보를 외부로 전송합니다.",
+        "order": 3,
         "category": "meta_project",
         "enabled": True,
     },

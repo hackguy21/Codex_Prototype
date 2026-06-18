@@ -1,7 +1,3 @@
-const state = {
-  summaryText: "",
-};
-
 const $ = (selector) => document.querySelector(selector);
 
 async function api(path, options = {}) {
@@ -68,43 +64,6 @@ function setupPanelToggles() {
   });
 }
 
-function setupSummaryActions() {
-  $("#summaryButton")?.addEventListener("click", () => runSummary(false));
-  $("#sendSimulationButton")?.addEventListener("click", () => runSummary(true));
-  $("#summaryCopyButton")?.addEventListener("click", async () => {
-    await navigator.clipboard.writeText(state.summaryText);
-    $("#summaryStatus").textContent = "요약을 클립보드에 복사했습니다.";
-  });
-}
-
-async function runSummary(simulateSend) {
-  const summaryButton = $("#summaryButton");
-  const sendButton = $("#sendSimulationButton");
-  const copyButton = $("#summaryCopyButton");
-  summaryButton.disabled = true;
-  sendButton.disabled = true;
-  copyButton.disabled = true;
-  $("#summaryStatus").textContent = simulateSend ? "전송 흐름을 시뮬레이션하는 중입니다..." : "전체 요약을 생성하는 중입니다...";
-  $("#summaryTextOutput").value = "";
-
-  try {
-    const result = await api("/api/prototype/summary", {
-      method: "POST",
-      body: JSON.stringify({ simulate_send: simulateSend }),
-    });
-    state.summaryText = result.summary || "";
-    $("#summaryTextOutput").value = state.summaryText;
-    $("#summaryStatus").textContent = result.message || "완료되었습니다.";
-    renderProjectList(result.projects || []);
-    copyButton.disabled = !state.summaryText;
-  } catch (error) {
-    $("#summaryStatus").textContent = error.message;
-  } finally {
-    summaryButton.disabled = false;
-    sendButton.disabled = false;
-  }
-}
-
 function renderProjectList(projects) {
   const container = $("#summaryProjectList");
   const count = $("#summaryProjectCount");
@@ -168,7 +127,9 @@ function escapeHtml(value) {
 setupNavigation();
 setupSidebarMenuToggle();
 setupPanelToggles();
-setupSummaryActions();
 loadMetaSettings().catch((error) => {
-  $("#summaryStatus").textContent = error.message;
+  const container = $("#summaryProjectList");
+  if (container) {
+    container.innerHTML = `<div class="status">${escapeHtml(error.message)}</div>`;
+  }
 });
