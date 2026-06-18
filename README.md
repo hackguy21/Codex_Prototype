@@ -18,6 +18,18 @@ cd "C:\Users\hyseong97\Documents\ProjectPrototype"
 .\scripts\windows\setup_venv.ps1
 ```
 
+macOS:
+
+```bash
+./scripts/macos/setup_venv.sh
+```
+
+Linux:
+
+```bash
+./scripts/linux/setup_venv.sh
+```
+
 The setup script:
 
 - finds Python 3.11 or newer
@@ -32,11 +44,24 @@ $env:PROJECT_PROTOTYPE_PYTHON = "C:\Path\To\Python311\python.exe"
 .\scripts\windows\setup_venv.ps1
 ```
 
+On macOS or Linux:
+
+```bash
+PROJECT_PROTOTYPE_PYTHON=/path/to/python3.11 ./scripts/macos/setup_venv.sh
+```
+
 Use the virtual environment directly when adding future modules:
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r .\requirements.txt
 .\.venv\Scripts\python.exe .\backend\server.py
+```
+
+On macOS or Linux:
+
+```bash
+./.venv/bin/python -m pip install -r ./requirements.txt
+./.venv/bin/python ./backend/server.py
 ```
 
 ## Run
@@ -46,10 +71,30 @@ cd "C:\Users\hyseong97\Documents\ProjectPrototype"
 .\scripts\windows\run_project_prototype.ps1
 ```
 
+macOS:
+
+```bash
+./scripts/macos/run_project_prototype.command
+```
+
+The macOS `.command` file can also be run by double-clicking it in Finder. It creates `.venv` if needed, starts the server, and opens `http://127.0.0.1:8000`.
+
+Linux:
+
+```bash
+./scripts/linux/run_project_prototype.sh
+```
+
 Without the helper script:
 
 ```powershell
 .\.venv\Scripts\python.exe .\backend\server.py
+```
+
+macOS or Linux:
+
+```bash
+./.venv/bin/python ./backend/server.py
 ```
 
 If `.venv` has not been created yet, the run helper falls back to `python`.
