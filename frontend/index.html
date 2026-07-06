@@ -201,23 +201,59 @@
           <div class="project-grid">
             <section class="panel">
               <div class="section-head">
-                <h3>위치</h3>
+                <h3 class="panel-title">
+                  <span># 패널 1</span>
+                  <strong>프로젝트 위치</strong>
+                </h3>
               </div>
-              <div class="standard-panel plain-standard-panel">
-                <ul>
-                  <li><strong>backend/projects/normal_project/example_1/</strong>: 이 프로젝트의 백엔드 코드 위치</li>
-                  <li><strong>NORMAL PROJECT</strong>: 프론트 네비게이션에서 일반 프로젝트를 모아두는 그룹</li>
-                  <li><strong>확장 방식</strong>: 새 일반 프로젝트는 `normal_project` 아래에 폴더를 추가하고 이 네비게이션 그룹에 연결합니다.</li>
-                </ul>
+              <div class="feature-box-list">
+                <article class="feature-box">
+                  <h4>## 기능 1 위치 기준</h4>
+                  <p><strong>backend/projects/normal_project/example_1/</strong> 아래에 이 프로젝트의 백엔드 코드를 둡니다.</p>
+                </article>
+                <article class="feature-box">
+                  <h4>## 기능 2 네비게이션 기준</h4>
+                  <p><strong>NORMAL PROJECT</strong> 그룹에 일반 프로젝트를 모으고, 새 프로젝트도 같은 그룹에 연결합니다.</p>
+                </article>
               </div>
             </section>
 
             <section class="panel results-panel">
               <div class="section-head">
-                <h3>상태</h3>
+                <h3 class="panel-title">
+                  <span># 패널 2</span>
+                  <strong>프로젝트 상태</strong>
+                </h3>
               </div>
-              <div class="status">예시 프로젝트 슬롯입니다. 아직 실행 로직은 없습니다.</div>
-              <textarea readonly placeholder="example_1의 결과 출력 영역입니다."></textarea>
+              <div class="feature-box-list">
+                <article class="feature-box">
+                  <h4>## 기능 1 현재 상태</h4>
+                  <p>예시 프로젝트 슬롯입니다. 아직 실행 로직은 없고, 화면 배치 규칙을 보여주는 기준 역할을 합니다.</p>
+                </article>
+                <article class="feature-box">
+                  <h4>## 기능 2 결과 출력</h4>
+                  <textarea readonly placeholder="example_1의 결과 출력 영역입니다."></textarea>
+                </article>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="section-head">
+                <h3 class="panel-title">
+                  <span># 패널 3</span>
+                  <strong>확장 가이드</strong>
+                </h3>
+              </div>
+              <div class="feature-box-list">
+                <article class="feature-box">
+                  <h4>## 기능 1 추가 위치</h4>
+                  <p>새 입력, 버튼, 목록, 결과 영역은 먼저 들어갈 패널 번호를 정한 뒤 해당 패널 안의 기능 박스로 추가합니다.</p>
+                </article>
+                <article class="feature-box">
+                  <h4>## 기능 2 정리 기준</h4>
+                  <p>서로 다른 목적의 UI는 같은 패널 안에서도 별도 기능 박스로 나누어 위치를 명확히 유지합니다.</p>
+                </article>
+              </div>
             </section>
           </div>
         </section>
